@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhillieDeux</title>
+  <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <h1>Trip Logger</h1>
+
+  <!-- Form to fetch trip details -->
+  <form id="tripForm">
+    <h2>Fetch Trip Details</h2>
+    <label for="tripNumber">Enter Trip Number:</label>
+    <input type="number" id="tripNumber" placeholder="Enter Trip Number" required>
+    <button type="submit">Show Trip</button>
+  </form>
+
+  <!-- Section to display trip details -->
+  <div id="tripDetails">
+    <!-- Trip details will be dynamically added here -->
+  </div>
+
+  <!-- Form to add new trip details -->
+  <form id="tripInputForm">
+    <h2>Add a New Trip</h2>
+    <label for="tripId">Trip ID:</label>
+    <input type="number" id="tripId" placeholder="Enter Trip ID" required>
+  
+    <label for="location">Location:</label>
+    <input type="text" id="location" placeholder="Enter Location" required>
+  
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" required>
+  
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" required>
+  
+    <label for="notes">Notes:</label>
+    <textarea id="notes" placeholder="Enter Notes"></textarea>
+  
+    <!-- Photo Upload Section -->
+    <label for="photoUpload">Upload Photos:</label>
+    <input type="file" id="photoUpload" accept="image/*" multiple>
+  
+    <button type="submit">Add Trip</button>
+  </form>
+
+  <!-- Button to export trips as JSON -->
+  <button id="exportTrips">Export Trips</button>
+
+  <h2>All Trips</h2>
+  <ul id="tripList">
+    <!-- List items will be dynamically generated here -->
+  </ul>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>
