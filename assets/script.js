@@ -1,4 +1,4 @@
-// Initialize IndexedDB
+// 1.  Initialize IndexedDB
 const dbRequest = indexedDB.open("phillieTroisDB", 1);
 
 dbRequest.onupgradeneeded = (event) => {
@@ -20,7 +20,7 @@ dbRequest.onerror = (event) => {
   console.error("Database error:", event.target.error);
 };
 
-// Toggle Menu
+// 2.  Toggle Menu
 document.getElementById("menuToggle").addEventListener("click", () => {
   document.getElementById("menu").classList.toggle("hidden");
 });
@@ -121,7 +121,7 @@ document.getElementById("tripInputForm").addEventListener("submit", function (e)
   });
 });
 
-// Display All Trips
+//  3. Display All Trips
 function displayAllTrips() {
   const dbRequest = indexedDB.open("phillieTroisDB", 1);
 
@@ -146,7 +146,7 @@ function displayAllTrips() {
   };
 }
 
-// Display Trip Details
+//  Display Trip Details
 function displayTrip(tripId) {
   const dbRequest = indexedDB.open("phillieTroisDB", 1);
 
@@ -181,6 +181,7 @@ function displayTrip(tripId) {
         <p><strong>Notes:</strong> ${trip.notes}</p>
         <h3>Photos:</h3>
         <div>${photos || "<p>No photos available.</p>"}</div>
+        <button onclick="deleteTrip(${trip.id})" style="color: red;">Delete Trip</button>
       `;
 
       hideAllSections();
@@ -188,6 +189,40 @@ function displayTrip(tripId) {
     };
   };
 }
+
+// 4. Delete Trip Function
+function deleteTrip(tripId) {
+  if (confirm("Are you sure you want to delete this trip? This action cannot be undone.")) {
+    const dbRequest = indexedDB.open("phillieTroisDB", 1);
+
+    dbRequest.onsuccess = (event) => {
+      const db = event.target.result;
+      const transaction = db.transaction("trips", "readwrite");
+      const store = transaction.objectStore("trips");
+
+      const deleteRequest = store.delete(tripId);
+      deleteRequest.onsuccess = () => {
+        alert(`Trip ${tripId} deleted successfully.`);
+        hideAllSections();
+        sections.viewTrips.classList.remove("hidden");
+        displayAllTrips(); // Refresh the list of trips
+      };
+
+      deleteRequest.onerror = () => {
+        console.error("Error deleting trip:", deleteRequest.error);
+        alert("Failed to delete the trip. Please try again.");
+      };
+    };
+
+    dbRequest.onerror = (event) => {
+      console.error("Database error:", event.target.error);
+      alert("Failed to connect to the database.");
+    };
+  }
+}
+
+
+
 
 // Close Trip Details
 document.querySelector(".closeBtn").addEventListener("click", () => {
