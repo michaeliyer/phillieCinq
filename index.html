@@ -3,58 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PhillieDeux</title>
-  <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+  <title>PhillieTrois</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-  <h1>Trip Logger</h1>
+  <header>
+    <h1>PhillieTrois: Trip Logger</h1>
+    <button id="menuToggle">☰ Menu</button>
+  </header> 
 
-  <!-- Form to fetch trip details -->
-  <form id="tripForm">
-    <h2>Fetch Trip Details</h2>
-    <label for="tripNumber">Enter Trip Number:</label>
-    <input type="number" id="tripNumber" placeholder="Enter Trip Number" required>
-    <button type="submit">Show Trip</button>
-  </form>
+  <nav id="menu" class="hidden">
+    <ul>
+      <li><button id="addTripBtn">Add a Trip</button></li>
+      <li><button id="viewTripsBtn">View All Trips</button></li>
+    </ul>
+  </nav>
 
-  <!-- Section to display trip details -->
-  <div id="tripDetails">
-    <!-- Trip details will be dynamically added here -->
-  </div>
+  <main>
+    <!-- Add Trip Section -->
+    <section id="addTripSection" class="hidden">
+      <h2>Add a New Trip</h2>
+      <form id="tripInputForm">
+        <label for="tripId">Trip ID:</label>
+        <input type="number" id="tripId" required>
 
-  <!-- Form to add new trip details -->
-  <form id="tripInputForm">
-    <h2>Add a New Trip</h2>
-    <label for="tripId">Trip ID:</label>
-    <input type="number" id="tripId" placeholder="Enter Trip ID" required>
-  
-    <label for="location">Location:</label>
-    <input type="text" id="location" placeholder="Enter Location" required>
-  
-    <label for="startDate">Start Date:</label>
-    <input type="date" id="startDate" required>
-  
-    <label for="endDate">End Date:</label>
-    <input type="date" id="endDate" required>
-  
-    <label for="notes">Notes:</label>
-    <textarea id="notes" placeholder="Enter Notes"></textarea>
-  
-    <!-- Photo Upload Section -->
-    <label for="photoUpload">Upload Photos:</label>
-    <input type="file" id="photoUpload" accept="image/*" multiple>
-  
-    <button type="submit">Add Trip</button>
-  </form>
+        <label for="location">Location:</label>
+        <input type="text" id="location" required>
 
-  <!-- Button to export trips as JSON -->
-  <button id="exportTrips">Export Trips</button>
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" required>
 
-  <h2>All Trips</h2>
-  <ul id="tripList">
-    <!-- List items will be dynamically generated here -->
-  </ul>
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" required>
+
+        <label for="notes">Notes:</label>
+        <textarea id="notes"></textarea>
+
+        <label for="photoUpload">Upload Photos:</label>
+        <input type="file" id="photoUpload" accept="image/*" multiple>
+
+        <button type="submit">Add Trip</button>
+      </form>
+    </section>
+
+    <!-- View All Trips Section -->
+    <section id="viewTripsSection" class="hidden">
+      <h2>All Trips</h2>
+      <ul id="tripList"></ul>
+    </section>
+
+    <!-- Trip Details Section -->
+    <section id="tripDetailsSection" class="hidden">
+      <h2>Trip Details</h2>
+      <div id="tripDetails"></div>
+      <button class="closeBtn">Close</button>
+    </section>
+  </main>
 
   <script src="assets/script.js"></script>
 </body>

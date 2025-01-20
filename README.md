@@ -1,30 +1,42 @@
-# PhillieDeux
+# PhillieTrois
 
-**PhillieDeux** is a web-based trip logging application that allows users to:
-- Add and store trip details (location, date, notes, etc.).
-- Upload and manage trip photos with thumbnails.
-- Organize notes by categories such as food, activities, and expenses.
-- Search and filter notes by date or prefix.
+PhillieTrois is a revamped version of PhillieDeux with enhanced functionality and a more refined user interface.
 
 ## Features
-- **Local Storage**: Trip data and photos are stored locally using IndexedDB.
-- **User-Friendly Interface**: Clean and intuitive design for easy navigation.
-- **Search and Categorization**: Quickly access trips and notes with powerful search features.
+1. **Dynamic Hidden Menu**:
+   - Sections for adding trips, viewing all trips, and exporting trips.
+   - Menus can be toggled on/off for a cleaner experience.
 
-## Setup Instructions
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/username/phillieDeux.git
+2. **Trip Management**:
+   - Add new trips with unique IDs.
+   - Edit existing trips without overwriting IDs unnecessarily.
+   - Delete trips with a confirmation dialog.
 
+3. **Trip Details**:
+   - View individual trip details.
+   - Collapse or expand trip details for better organization.
+   - Manage daily notes for each trip (add/edit/delete).
 
+4. **Photo Management**:
+   - Upload photos for each trip.
+   - Display thumbnails in trip details.
+   - View full-sized images on click.
 
+5. **Export/Import**:
+   - Export all trips as a JSON file.
+   - Import trips into another browser or device.
 
-   ## Development Tools
-- **Reset Database**:
-  - Use the following JavaScript function to reset the IndexedDB database:
-    ```javascript
-    indexedDB.deleteDatabase("phillieDeuxDB");
-    ```
-  - Alternatively, uncomment the `resetDatabase()` function in `dev-tools.js` to enable it in the app.
+6. **UI/UX Enhancements**:
+   - Clean, responsive layout using CSS Grid or Flexbox.
+   - Mobile-friendly design.
 
-  - Create a button :   <button id="resetDatabase">Reset Database</button>
+## How to Run
+1. Open `index.html` in any modern browser.
+2. Use the hidden menu to navigate between functionalities.
+
+## Future Plans
+- User authentication for multi-user functionality.
+- Cloud syncing for trips.
+
+## Contributions
+Feel free to fork and suggest enhancements!

@@ -1,6 +1,194 @@
+/* General Reset */
 body {
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
-    font-family: "Acme", serif;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
 }
 
+header {
+  background: #4CAF50;
+  color: #fff;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+header button {
+  background: #fff;
+  color: #4CAF50;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+header button:hover {
+  background: #ddd;
+}
+
+/* Navigation Menu */
+nav {
+  background: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+nav li {
+  margin: 5px 0;
+}
+
+nav li button {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  font-size: 16px;
+  width: 100%;
+  text-align: left;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+nav li button:hover {
+  background: #45a049;
+}
+
+/* Hidden Menu Styling */
+.hidden {
+  display: none;
+}
+
+/* Main Content Styling */
+main {
+  padding: 15px;
+}
+
+section {
+  margin-bottom: 20px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  margin-top: 0;
+}
+
+/* Buttons */
+button {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+/* Input Fields */
+input[type="number"],
+input[type="text"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0 20px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+input[type="file"] {
+  margin-bottom: 20px;
+}
+
+/* Trip List */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 10px;
+  margin-bottom: 5px;
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+ul li:hover {
+  background: #ddd;
+}
+
+/* Trip Details Section */
+#tripDetails img {
+  width: 100px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#tripDetails img:hover {
+  border-color: #4CAF50;
+}
+
+/* Close Button */
+.closeBtn {
+  background: #f44336;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  float: right;
+}
+
+.closeBtn:hover {
+  background: #e53935;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+  }
+
+  header h1 {
+    font-size: 18px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+}
