@@ -3,32 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PhillieTrois</title>
+  <title>PhillieCinq</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <header>
-    <h1>PhillieTrois: Trip Logger</h1>
+    <h1>PhillieCinq: Trip Logger</h1>
     <button id="menuToggle">☰ Menu</button>
-  </header> 
+  </header>
 
   <nav id="menu" class="hidden">
     <ul>
       <li><button id="addTripBtn">Add a Trip</button></li>
       <li><button id="viewTripsBtn">View All Trips</button></li>
+      <li><button id="exportTripsBtn">Export Trips</button></li>
+      <li><button id="importTripsBtn">Import Trips</button></li>
     </ul>
+    <input type="file" id="importTrips" accept=".json" class="hidden">
   </nav>
 
   <main>
-    <!-- Add Trip Section -->
     <section id="addTripSection" class="hidden">
-      <h2>Add a New Trip</h2>
+      <h2>Add a Trip</h2>
       <form id="tripInputForm">
         <label for="tripId">Trip ID:</label>
-        <input type="number" id="tripId" required>
+        <input type="number" id="tripId" placeholder="Enter Trip ID" required>
 
         <label for="location">Location:</label>
-        <input type="text" id="location" required>
+        <input type="text" id="location" placeholder="Enter Location" required>
 
         <label for="startDate">Start Date:</label>
         <input type="date" id="startDate" required>
@@ -37,29 +39,32 @@
         <input type="date" id="endDate" required>
 
         <label for="notes">Notes:</label>
-        <textarea id="notes"></textarea>
+        <textarea id="notes" placeholder="Enter Notes"></textarea>
 
         <label for="photoUpload">Upload Photos:</label>
         <input type="file" id="photoUpload" accept="image/*" multiple>
 
-        <button type="submit">Add Trip</button>
+        <button type="submit">Save Trip</button>
       </form>
     </section>
 
-    <!-- View All Trips Section -->
     <section id="viewTripsSection" class="hidden">
       <h2>All Trips</h2>
-      <ul id="tripList"></ul>
+      <ul id="tripList">
+        <p>No trips available. Add a new trip to see it listed here.</p>
+      </ul>
+      </ul>
     </section>
 
-    <!-- Trip Details Section -->
     <section id="tripDetailsSection" class="hidden">
       <h2>Trip Details</h2>
       <div id="tripDetails"></div>
-      <button class="closeBtn">Close</button>
     </section>
   </main>
 
   <script src="assets/script.js"></script>
 </body>
+<footer>
+  <p>PhillieCinq © 2025</p>
+</footer>
 </html>
