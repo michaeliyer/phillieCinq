@@ -271,8 +271,37 @@ function displayTrip(trip) {
   // Add toggle event listeners
   addToggleEvent("hideTripDetailsBtn", "tripDetailsContent", "Show Trip Details", "Hide Trip Details");
   addToggleEvent("hideDailyNotesBtn", "dailyNotesContent", "Show Daily Notes", "Hide Daily Notes");
+  addToggleEvent("hideAllTripsBtn", "tripList", "Show All Trips", "Hide All Trips");
 
+// Show trip details section
+// document.getElementById("tripDetailsSection").classList.remove("hidden");
 
+// // Toggle visibility helper
+// const addToggleEvent = (buttonId, contentId, showText, hideText) => {
+//   const button = document.getElementById(buttonId);
+//   const content = document.getElementById(contentId);
+//   button.addEventListener("click", () => {
+//     content.classList.toggle("hidden");
+//     button.textContent = content.classList.contains("hidden") ? showText : hideText;
+//   });
+// };
+
+// // Add toggle event listeners
+// addToggleEvent("hideTripDetailsBtn", "tripDetailsContent", "Show Trip Details", "Hide Trip Details");
+// addToggleEvent("hideDailyNotesBtn", "dailyNotesContent", "Show Daily Notes", "Hide Daily Notes");
+
+// // Add Hide All Trips functionality
+// const hideAllTripsBtn = document.getElementById("hideAllTripsBtn");
+// const tripList = document.getElementById("tripList");
+// const noTripsMessage = document.getElementById("noTripsMessage");
+
+// hideAllTripsBtn.addEventListener("click", () => {
+//   tripList.classList.toggle("hidden");
+//   noTripsMessage.classList.toggle("hidden"); // Hide "No trips available" message if visible
+//   hideAllTripsBtn.textContent = tripList.classList.contains("hidden")
+//     ? "Show All Trips"
+//     : "Hide All Trips";
+// });
 
 
 
@@ -633,111 +662,7 @@ function deletePhoto(tripId, photoIndex) {
 
 
 
-// Export Trips
-document.getElementById("exportTripsBtn").addEventListener("click", () => {
-  console.log("Export button clicked!"); // Debugging log
-  const dbRequest = indexedDB.open("phillieCinqDB", 1);
-
-  dbRequest.onsuccess = function (event) {
-    console.log("Database opened successfully for export.");
-    const db = event.target.result;
-    const transaction = db.transaction("trips", "readonly");
-    const store = transaction.objectStore("trips");
-
-    store.getAll().onsuccess = function (event) {
-      const trips = event.target.result;
-
-      if (trips.length === 0) {
-        alert("No trips available to export!");
-        return;
-      }
-
-      const blob = new Blob([JSON.stringify(trips, null, 2)], {
-        type: "application/json",
-      });
-
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "trips.json";
-      a.click();
-      URL.revokeObjectURL(url); // Clean up
-      alert("Trips exported successfully!");
-    };
-
-    store.getAll().onerror = function () {
-      console.error("Error fetching trips for export.");
-    };
-  };
-
-  dbRequest.onerror = function () {
-    console.error("Error opening database for export.");
-    alert("Failed to open the database for export.");
-  };
-});
-
-// Import Trips
-document.getElementById("importTripsBtn").addEventListener("click", () => {
-  console.log("Import button clicked!"); // Debugging log
-  document.getElementById("importTrips").click();
-});
-
-document.getElementById("importTrips").addEventListener("change", function (e) {
-  console.log("Import file selected!"); // Debugging log
-  const file = e.target.files[0];
-  if (!file) {
-    console.error("No file selected.");
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = function (event) {
-    try {
-      console.log("File read successfully."); // Debugging log
-      const trips = JSON.parse(event.target.result);
-
-      if (!Array.isArray(trips)) {
-        throw new Error("Invalid file format. Expected an array.");
-      }
-
-      const dbRequest = indexedDB.open("phillieCinqDB", 1);
-
-      dbRequest.onsuccess = function (event) {
-        console.log("Database opened successfully for import.");
-        const db = event.target.result;
-        const transaction = db.transaction("trips", "readwrite");
-        const store = transaction.objectStore("trips");
-
-        let validTripsCount = 0;
-
-        trips.forEach((trip) => {
-          if (trip.id && trip.location && trip.startDate && trip.endDate) {
-            store.put(trip); // Add/Overwrite trip
-            validTripsCount++;
-          } else {
-            console.warn("Skipped invalid trip:", trip);
-          }
-        });
-
-        alert(`${validTripsCount} trips successfully imported!`);
-        displayAllTrips(); // Refresh the trip list
-      };
-
-      dbRequest.onerror = function () {
-        console.error("Error opening database for import.");
-        alert("Failed to open the database for import.");
-      };
-    } catch (error) {
-      console.error("Import error:", error);
-      alert("Invalid file format. Please upload a valid JSON file.");
-    }
-  };
-
-  reader.readAsText(file);
-});
-
-
-// Export Trips
+// // Export Trips
 // document.getElementById("exportTripsBtn").addEventListener("click", () => {
 //   const dbRequest = indexedDB.open("phillieCinqDB", 1);
 
@@ -747,29 +672,23 @@ document.getElementById("importTrips").addEventListener("change", function (e) {
 //     const store = transaction.objectStore("trips");
 
 //     const getAllRequest = store.getAll();
-//     getAllRequest.onsuccess = function () {
-//       const trips = getAllRequest.result;
+//     getAllRequest.onsuccess = function (event) {
+//       const trips = event.target.result;
 
-//       if (trips.length === 0) {
-//         alert("No trips available to export!");
-//         return;
-//       }
-
-//       const blob = new Blob([JSON.stringify(trips, null, 2)], {
-//         type: "application/json",
-//       });
-
+//       // Create JSON blob for download
+//       const blob = new Blob([JSON.stringify(trips, null, 2)], { type: "application/json" });
 //       const url = URL.createObjectURL(blob);
+
+//       // Create download link
 //       const a = document.createElement("a");
 //       a.href = url;
 //       a.download = "trips.json";
 //       a.click();
-//       URL.revokeObjectURL(url); // Clean up
 //       alert("Trips exported successfully!");
 //     };
 
 //     getAllRequest.onerror = function () {
-//       alert("Failed to fetch trips for export.");
+//       alert("Failed to retrieve trips for export.");
 //     };
 //   };
 
@@ -778,9 +697,9 @@ document.getElementById("importTrips").addEventListener("change", function (e) {
 //   };
 // });
 
-// Import Trips
+// // Import Trips
 // document.getElementById("importTripsBtn").addEventListener("click", () => {
-//   document.getElementById("importTrips").click();
+//   document.getElementById("importTrips").click(); // Trigger hidden file input
 // });
 
 // document.getElementById("importTrips").addEventListener("change", function (e) {
@@ -793,7 +712,7 @@ document.getElementById("importTrips").addEventListener("change", function (e) {
 //       const trips = JSON.parse(event.target.result);
 
 //       if (!Array.isArray(trips)) {
-//         throw new Error("Invalid file format. Expected an array.");
+//         throw new Error("Invalid file format.");
 //       }
 
 //       const dbRequest = indexedDB.open("phillieCinqDB", 1);
@@ -803,18 +722,16 @@ document.getElementById("importTrips").addEventListener("change", function (e) {
 //         const transaction = db.transaction("trips", "readwrite");
 //         const store = transaction.objectStore("trips");
 
-//         let validTripsCount = 0;
-
 //         trips.forEach((trip) => {
+//           // Validate required trip fields
 //           if (trip.id && trip.location && trip.startDate && trip.endDate) {
-//             store.put(trip); // Add/Overwrite trip
-//             validTripsCount++;
+//             store.put(trip); // Add or overwrite trip
 //           } else {
 //             console.warn("Skipped invalid trip:", trip);
 //           }
 //         });
 
-//         alert(`${validTripsCount} trips successfully imported!`);
+//         alert("Trips imported successfully!");
 //         displayAllTrips(); // Refresh the trip list
 //       };
 

@@ -3,7 +3,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f9;
+  background-color: #3131ba;
   color: #333;
 }
 
@@ -54,6 +54,7 @@ nav ul li {
 
 main {
   padding: 1rem;
+  background-color: #425eda;
 }
 
 section {
@@ -79,11 +80,12 @@ ul#tripList li {
   margin: 0.5rem 0;
   cursor: pointer;
   border-radius: 5px;
-  background: #f9f9f9;
+  /* background: #f9f9f9; */
+  background: #5e3eed;
 }
 
 ul#tripList li:hover {
-  background: #eee;
+  background: #1d1dc4;
 }
 
 #tripDetails img {
@@ -113,4 +115,14 @@ ul#tripList li:hover {
 .add-photo-btn {
   display: block;
   margin-top: 5px;
+}
+
+#viewTripsSection,
+#tripDetailsSection,
+#addTripSection {
+  background-color: #425eda;
+}
+
+footer {
+  background-color: #637ae2;
 }
